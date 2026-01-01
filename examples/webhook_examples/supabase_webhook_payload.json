@@ -1,0 +1,24 @@
+{
+  "event_type": "insert",
+  "source": "supabase",
+  "table_name": "users",
+  "record_id": "123e4567-e89b-12d3-a456-426614174000",
+  "data": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user",
+    "status": "active",
+    "created_at": "2026-01-01T15:00:00Z",
+    "updated_at": "2026-01-01T15:00:00Z",
+    "metadata": {
+      "registration_source": "web",
+      "verified": true
+    }
+  },
+  "timestamp": "2026-01-01T15:00:00Z",
+  "metadata": {
+    "schema": "public",
+    "operation": "INSERT"
+  }
+}
