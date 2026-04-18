@@ -52,9 +52,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include webhook router
-app.include_router(webhook_router)
-
 # Initialize clients
 supabase_client = SupabaseClient()
 notion_client = NotionDatabaseClient()
@@ -497,6 +494,63 @@ async def clear_prompt_cache():
         "message": "Prompt cache cleared",
         "timestamp": datetime.utcnow().isoformat()
     }
+
+
+@app.post("/api/v1/webhooks/supabase")
+async def supabase_webhook(
+    payload: WebhookPayload,
+    background_tasks: BackgroundTasks
+):
+    """Webhook endpoint for Supabase real-time updates."""
+    if payload.source != SourceType.SUPABASE:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid source type for Supabase webhook"
+        )
+    
+    background_tasks.add_task(process_webhook, payload)
+    
+    return {
+        "status": "accepted",
+        "message": "Webhook payload received and queued for processing",
+        "event_type": payload.event_type,
+        "record_id": payload.record_id
+    }
+
+
+@app.post("/api/v1/webhooks/notion")
+async def notion_webhook(
+    payload: WebhookPayload,
+    background_tasks: BackgroundTasks
+):
+    """Webhook endpoint for Notion real-time updates."""
+    if payload.source != SourceType.NOTION:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid source type for Notion webhook"
+        )
+    
+    background_tasks.add_task(process_webhook, payload)
+    
+    return {
+        "status": "accepted",
+        "message": "Webhook payload received and queued for processing",
+        "event_type": payload.event_type,
+        "record_id": payload.record_id
+    }
+
+
+async def process_webhook(payload: WebhookPayload):
+    """Process webhook payload in background."""
+    logger.info(f"Processing webhook: {payload.event_type} for {payload.source} - {payload.record_id}")
+    
+    # Clear cache on data updates to ensure fresh prompts
+    if payload.event_type in ["insert", "update", "delete"]:
+        prompt_generator.clear_cache()
+        logger.info("Prompt cache cleared due to data update")
+    
+    # Additional webhook processing logic here
+    logger.info(f"Webhook processed: {payload.record_id}")
 
 
 if __name__ == "__main__":
