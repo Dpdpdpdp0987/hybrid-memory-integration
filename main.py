@@ -26,9 +26,6 @@ from prompt_integration import (
 from datetime import datetime
 from pydantic import BaseModel
 
-# Import webhook router
-from webhook_router import router as webhook_router
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -51,6 +48,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include webhook router
+from webhook_router import router as webhook_router
+
+app.include_router(webhook_router)
 
 # Initialize clients
 supabase_client = SupabaseClient()
