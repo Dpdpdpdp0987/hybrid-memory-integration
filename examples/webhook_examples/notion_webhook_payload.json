@@ -1,0 +1,73 @@
+{
+  "event_type": "update",
+  "source": "notion",
+  "table_name": "e8d4b0a1c7f24a9e8f2d5c3b1a6e9f4d",
+  "record_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "data": {
+    "object": "page",
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "created_time": "2026-01-01T14:00:00.000Z",
+    "last_edited_time": "2026-01-01T15:00:00.000Z",
+    "properties": {
+      "Name": {
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Project Alpha"
+            },
+            "plain_text": "Project Alpha"
+          }
+        ]
+      },
+      "Status": {
+        "type": "select",
+        "select": {
+          "name": "In Progress",
+          "color": "blue"
+        }
+      },
+      "Priority": {
+        "type": "select",
+        "select": {
+          "name": "High",
+          "color": "red"
+        }
+      },
+      "Assignee": {
+        "type": "people",
+        "people": [
+          {
+            "object": "user",
+            "id": "user-123",
+            "name": "Alice Smith"
+          }
+        ]
+      },
+      "Due Date": {
+        "type": "date",
+        "date": {
+          "start": "2026-01-15",
+          "end": null
+        }
+      },
+      "Description": {
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Development of the new API integration"
+            },
+            "plain_text": "Development of the new API integration"
+          }
+        ]
+      }
+    }
+  },
+  "timestamp": "2026-01-01T15:00:00Z",
+  "metadata": {
+    "workspace_id": "workspace-789"
+  }
+}

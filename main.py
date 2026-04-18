@@ -49,6 +49,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include webhook router
+from webhook_router import router as webhook_router
+
+app.include_router(webhook_router)
+
 # Initialize clients
 supabase_client = SupabaseClient()
 notion_client = NotionDatabaseClient()
