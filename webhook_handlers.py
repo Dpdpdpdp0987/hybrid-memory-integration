@@ -9,7 +9,7 @@ import logging
 import json
 from enum import Enum
 
-from models import WebhookPayload, SourceType, DataResponse
+from models import WebhookPayload, SourceType
 from database_clients import SupabaseClient, NotionDatabaseClient
 from config import settings
 
